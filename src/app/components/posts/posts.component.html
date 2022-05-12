@@ -1,0 +1,91 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9 col-sm-12 col-md-12">
+            <div class="card">
+                <div class="card-body">
+                <ng-container *ngIf="postListLength>0">
+                    <div class="row" *ngFor="let item of postList">
+                        <div class="col-lg-12 col-sm-12 col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <a href="javascript:void(0)" (click)="navigateToPost(item.id)" [innerHtml]="item.description" class="text-decoration-none text-primary">{{item.description}}.splice(13)</a>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between">
+                                    <ul class="nav me-auto text-capitalize">
+                                        <li>
+                                           <small>{{item.userName}}, {{item.createdOn.split("T")[0] }}</small> 
+                                        </li>
+                                    </ul>
+                                    <div class="d-flex">
+                                        <ul class="nav me-auto text-capitalize">
+                                            <li class="mx-2" >
+                                                <a href="javascript:void(0)" class="fs-0 text-decoration-none text-info" (click)="postLikedByUser(item)"  title="Like">
+                                                    <i class="bi bi-hand-thumbs-up-fill" *ngIf="item.userLiked"></i>
+                                                    <i class="bi bi-hand-thumbs-up" *ngIf="!item.userLiked"></i>
+                                                    {{item.likedVoteCount}} 
+                                                </a>
+                                            </li>
+                                            <li class="mx-2">
+                                                <a href="javascript:void(0)" class="fs-0 text-decoration-none  text-danger" (click)="postDisLikedByUser(item)"  title="Dislike">
+                                                    <i class="bi bi-hand-thumbs-down-fill" *ngIf="item.userDisLiked"></i>
+                                                    <i class="bi bi-hand-thumbs-down" *ngIf="!item.userDisLiked"></i>
+                                                    
+                                                    {{item.disLikedVoteCount}}  </a>
+                                            </li>
+                                            <li class="mx-2">
+                                                <a href="javascript:void(0)"  (click)="navigateToPost(item.id)"  class="fs-0 text-decoration-none  text-dark" title="Comment"> <i class="bi bi-chat-text-fill"></i></a>
+                                            </li>
+                                            <li class="mx-2">
+                                                <a href="javascript:void(0)" class="fs-0 text-decoration-none text-danger" title="Report"> <i class="bi bi-flag-fill"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="postListLength==0">
+                    <h3 class="text-center">No post available</h3>
+                </ng-container> 
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-12 col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <p class="text-center">Search Criteria:</p>
+                    <form action="">
+                        <fieldset>
+                            <div class="form-check d-flex justify-content-between ">
+                                <input class="form-check-input" type="checkbox" value="" checked>
+                                <label class="form-check-label mx-2">
+                              All
+                                </label>
+                                <span class="badge rounded-pill bg-primary float-end ">1</span>
+
+
+                            </div>
+                            <div class="form-check d-flex justify-content-between">
+                                <input class="form-check-input" type="checkbox" value="">
+                                <label class="form-check-label">
+                             High Rated Post(s)
+                            </label><span class="badge rounded-pill bg-primary float-end">1</span>
+                            </div>
+                            <div class="form-check d-flex justify-content-between">
+                                <input class="form-check-input" type="checkbox" value="">
+                                <label class="form-check-label">
+                             Recent Post(s)
+                            </label><span class="badge rounded-pill bg-primary float-end">1</span>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box" [fullScreen]="true">
+    <p style="color: white"> Fetching Posts... </p>
+</ngx-spinner>

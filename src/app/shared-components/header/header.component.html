@@ -1,0 +1,16 @@
+<nav class="py-2 bg-light border-bottom">
+    <div class="container d-flex justify-content-between">
+        <a href="javascript:void(0)" class="nav-link link-dark px-2 active" aria-current="page">
+            <h4 class="text-primary">Query Forum</h4>
+        </a>
+        <div class="d-flex justify-content-end float-end">
+            <ul class="nav me-auto d-flex justify-content-end align-items-center ">
+                <li class="nav-item"><a href="javascript:void(0)" role="button" class="btn btn-warning mx-2" routerLink="/dashboard">Home</a></li>
+                <li class="nav-item"><a href="javascript:void(0)" role="button" class="btn btn-warning mx-2" routerLink="/dashboard/post">New Post</a></li>
+                <li class="nav-item"><a href="javascript:void(0)" role="button" class="btn btn-warning mx-2" routerLink="/dashboard/my-post">My Posts</a></li>
+                <li class="nav-item"><a href="javascript:void(0)" role="button" class="btn btn-warning mx-2" routerLink="/dashboard/profile">Profile</a></li>
+                <li class="nav-item"><a href="javascript:void(0)" role="button" class="btn btn-warning mx-2" (click)="logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
