@@ -10,30 +10,41 @@
                             <fieldset>
                                 <div class="form-group">
                                     <label class="form-label mt-4">Username</label>
-                                    <input type="text" name="" id="" cols="30" rows="3" class="form-control form-control-sm" formControlName="userName" readonly>
+                                    <input type="text" name="userName" class="form-control form-control-sm"  readonly formControlName="userName">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label mt-4">Email</label>
-                                    <input type="text" name="" id="" cols="30" rows="3" class="form-control form-control-sm" formControlName="email" readonly>
+                                    <input type="text" name="email" class="form-control form-control-sm"  readonly formControlName="email">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label mt-4">Phone Number</label>
-                                    <input type="number" name="" id="" cols="30" rows="3" class="form-control form-control-sm" formControlName="email" >
+                                    <input type="text" class="form-control form-control-sm" formControlName="phoneNumber" name="phoneNumber">
+                                    <div *ngIf="!profileForm.controls['phoneNumber'].valid && (profileForm.controls['phoneNumber'].dirty ||profileForm.controls['phoneNumber'].touched)">
+                                        <div [hidden]="!profileForm.controls['phoneNumber'].errors?.['required']">
+                                            <small class="text-danger">Phone Number is required</small>
+                                        </div>
+                                        <div [hidden]="!profileForm.controls['phoneNumber'].errors?.['maxLength']">
+                                            <small class="text-danger">Phone Number should be 10 </small>
+                                        </div>
+                                        <div [hidden]="!profileForm.controls['phoneNumber'].errors?.['pattern']">
+                                            <small class="text-danger">Only Numbers allowed </small>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label mt-4">Gender</label><br>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" value="Male">
+                                        <input class="form-check-input" type="radio" name="gender" value="Male" formControlName="gender" >
                                         <label class="form-check-label">Male</label>
                                       </div>
                                       <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"value="Female">
+                                        <input class="form-check-input" type="radio" name="gender"value="Female" formControlName="gender">
                                         <label class="form-check-label">Female</label>
                                       </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label mt-4">Location</label>
-                                    <input type="number" name="" id="" cols="30" rows="3" class="form-control form-control-sm" formControlName="location" >
+                                    <input type="number" name="location" id="" cols="30" rows="3" class="form-control form-control-sm" formControlName="location" >
                                 </div>
                             </fieldset>
                         </div>
@@ -41,23 +52,28 @@
                             <fieldset>
                                 <div class="form-group">
                                     <label class="form-label mt-4">Organization</label>
-                                    <input type="text" name="" id="" cols="30" rows="3" class="form-control form-control-sm" formControlName="organization" [disabled]="true">
+                                    <input type="text" name="organization" id="" cols="30" rows="3" class="form-control form-control-sm" formControlName="organization" [disabled]="true">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label mt-4">Designation</label>
-                                    <input type="text" name="" id="" cols="30" rows="3" class="form-control form-control-sm" formControlName="designation" [disabled]="true">
+                                    <input type="text" name="designation" id="" cols="30" rows="3" class="form-control form-control-sm" formControlName="designation" [disabled]="true">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label mt-4">Skills</label>
-                                    <input type="text" name="" id="" cols="30" rows="3" class="form-control form-control-sm" formControlName="skills" >
+                                    <input type="text" name="skills" id="" cols="30" rows="3" class="form-control form-control-sm" formControlName="skills" >
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label mt-4">LinkedIn URL</label>
-                                    <input type="text" name="" id="" cols="30" rows="3" class="form-control form-control-sm" formControlName="linkedIn" >
+                                    <input type="text" name="linkedIn" id="" cols="30" rows="3" class="form-control form-control-sm" formControlName="linkedIn" >
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label mt-4">Github URL</label>
-                                    <input type="text" name="" id="" cols="30" rows="3" class="form-control form-control-sm" formControlName="github" >
+                                    <input type="text" name="github" id="" cols="30" rows="3" class="form-control form-control-sm" formControlName="github" >
+                                    <div *ngIf="!profileForm.controls['github'].valid && (profileForm.controls['github'].dirty ||profileForm.controls['github'].touched)">
+                                        <div [hidden]="!profileForm.controls['github'].errors?.['pattern']">
+                                            <small class="text-danger">Invalid URL</small>
+                                        </div>
+                                    </div>
                                 </div>
                             </fieldset>
                         </div>

@@ -9,15 +9,23 @@ import { baseUrl } from "src/app/common";
 })
 export class RegisterService {
   constructor(private httpClient: HttpClient) {}
-
+  SUB_URL: string = "api/auth/";
   //Auth URL
-  private signupUrl = baseUrl.BASE_URL + "api/auth/signup";
-  private loginUrl = baseUrl.BASE_URL + "api/auth/login";
+  private signupUrl = baseUrl.BASE_URL+ this.SUB_URL + "signup";
+  private loginUrl = baseUrl.BASE_URL+ this.SUB_URL + "login";
+  private profileUrl = baseUrl.BASE_URL+ this.SUB_URL + "profile";
+  private getuserProfileUrl = baseUrl.BASE_URL+ this.SUB_URL + "getuserProfile";
 
-  registerNewUser(user: register): Observable<Object> {
-    return this.httpClient.post(`${this.signupUrl}`, user);
+  registerNewUser(user: register): Observable<register> {
+    return this.httpClient.post<register>(`${this.signupUrl}`, user);
   }
-  loginUser(user: register): Observable<Object> {
-    return this.httpClient.post(`${this.loginUrl}`, user);
+  loginUser(user: register): Observable<register>{
+    return this.httpClient.post<register>(`${this.loginUrl}`, user);
+  }
+  profile(user: register): Observable<register> {
+    return this.httpClient.put<register>(`${this.profileUrl}`, user);
+  }
+  getuserProfile(id: string):Observable<register> {
+    return this.httpClient.get<register>(`${this.getuserProfileUrl}/${id}`);
   }
 }
