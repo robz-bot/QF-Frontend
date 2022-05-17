@@ -18,6 +18,7 @@ import { EditorModule } from "@tinymce/tinymce-angular";
 import { NewPostComponent } from "./components/new-post/new-post.component";
 import { MyPostsComponent } from "./components/my-posts/my-posts.component";
 import { ProfileComponent } from './components/profile/profile.component';
+import { PostReportComponent } from './components/post-report/post-report.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +31,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     NewPostComponent,
     MyPostsComponent,
     ProfileComponent,
+    PostReportComponent,
   ],
   imports: [
     CommonModule,

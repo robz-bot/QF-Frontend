@@ -62,6 +62,7 @@ export class PostCommentComponent implements OnInit {
       if (this.resData.success) {
         this.newCommentForm.reset();
         this.toaster.showSuccess(this.resData.message);
+        this.getAllCommentsByPostIds()
       } else {
         this.toaster.showFailure(this.resData.message);
       }

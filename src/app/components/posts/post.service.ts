@@ -12,7 +12,7 @@ export class PostService {
   //Post URL
   private newPostUrl = baseUrl.BASE_URL + "api/post/newPost";
   private getPostsUrl = baseUrl.BASE_URL + "api/post/";
-  private allPostByUserIdUrl = baseUrl.BASE_URL + "api/post/allPostByUserId/";
+  private allPostByUserIdUrl = baseUrl.BASE_URL + "api/post/allPostByUserId";
   private getPostByIdUrl = baseUrl.BASE_URL + "api/post/getPost/";
   private getUserPostUrl = baseUrl.BASE_URL + "api/post/getUserPost/";
 

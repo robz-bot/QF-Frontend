@@ -3,16 +3,17 @@
         <div class="col-lg-12 col-sm-12 col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="row" *ngFor="let item of myPostList">
+                    <ng-container *ngIf="myPostListCount>0">
+                    <div class="row" *ngFor="let item of myPostList" >
                         <div class="col-lg-12 col-sm-12 col-md-12">
                             <div class="card">
                                 <div class="card-body">
                                     <a href="javascript:void(0)" (click)="navigateToPost(item.id)" [innerHtml]="item.description" class="text-decoration-none text-primary">{{item.description}}</a>
                                 </div>
                                 <div class="card-footer d-flex justify-content-between">
-                                    <ul class="nav me-auto text-capitalize">
+                                    <ul class="nav me-auto">
                                         <li>
-                                            <small> Post At: {{item.createdOn.split("T")[0] }}</small>
+                                            <small> {{item.createdOn.split("T")[0] }} - {{item.createdTimeAgo}}</small>
                                         </li>
                                     </ul>
                                     <div class="d-flex">
@@ -35,6 +36,10 @@
                             </div>
                         </div>
                     </div>
+                    </ng-container>
+                    <ng-container *ngIf="myPostListCount==0">
+                        <h5 class="text-center">No Post(s) available</h5>
+                    </ng-container>
                 </div>
             </div>
         </div>

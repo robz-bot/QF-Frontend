@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private route: Router
   ) {}
-  loginForm!: FormGroup;
+  loginForm!: FormGroup;  
   loginValue: register = new register();
   ngOnInit() {
     this.loginForm = new FormGroup({

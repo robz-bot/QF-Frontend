@@ -11,9 +11,9 @@
                                     <a href="javascript:void(0)" (click)="navigateToPost(item.id)" [innerHtml]="item.description" class="text-decoration-none text-primary">{{item.description}}.splice(13)</a>
                                 </div>
                                 <div class="card-footer d-flex justify-content-between">
-                                    <ul class="nav me-auto text-capitalize">
+                                    <ul class="nav me-auto ">
                                         <li>
-                                           <small>{{item.userName}}, {{item.createdOn.split("T")[0] }}</small> 
+                                           <small>{{item.userName}}, {{item.createdOn.split("T")[0]}} - {{item.createdTimeAgo }}</small> 
                                         </li>
                                     </ul>
                                     <div class="d-flex">
@@ -36,7 +36,9 @@
                                                 <a href="javascript:void(0)"  (click)="navigateToPost(item.id)"  class="fs-0 text-decoration-none  text-dark" title="Comment"> <i class="bi bi-chat-text-fill"></i></a>
                                             </li>
                                             <li class="mx-2">
-                                                <a href="javascript:void(0)" class="fs-0 text-decoration-none text-danger" title="Report"> <i class="bi bi-flag-fill"></i></a>
+                                                <a href="javascript:void(0)" class="fs-0 text-decoration-none text-danger" title="Report"
+                                                (click)="getAllReportsType(item)"
+                                                data-bs-toggle="modal" data-bs-target="#reportModal"> <i class="bi bi-flag-fill"></i></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -86,6 +88,56 @@
     </div>
 
 </div>
-<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box" [fullScreen]="true">
+
+<!-- Modal -->
+<div class="modal fade" id="reportModal"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Report Form </h5>
+          <button type="button" #closebutton class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="reportForm" (ngSubmit)="onSubmitReport()">
+                <fieldset>
+                    <div class="form-group">
+                        <label class="form-label ">Report Type</label>
+                        <select class="form-select" formControlName="reportTypeId" >
+                            <option value="{{item.id}}" *ngFor="let item of reportTypeList">
+                                {{item.report}}</option>
+                            
+                          </select> 
+                        <div *ngIf="!reportForm.controls['reportTypeId'].valid && (reportForm.controls['reportTypeId'].dirty ||reportForm.controls['reportTypeId'].touched)">
+                            <div [hidden]="!reportForm.controls['reportTypeId'].errors?.['required']">
+                                <small class="text-danger">Report Type is required</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label mt-4">Reason</label>
+                        <textarea class="form-control" formControlName="reason"></textarea>
+                        <div *ngIf="!reportForm.controls['reason'].valid && (reportForm.controls['reason'].dirty ||reportForm.controls['reason'].touched)">
+                            <div [hidden]="!reportForm.controls['reason'].errors?.['required']">
+                                <small class="text-danger">Reason is required</small>
+                            </div>
+                         
+                        </div>
+                    </div>
+
+                </fieldset>
+                <fieldset class="text-center">
+                    <button type="submit" class="btn btn-md btn-primary my-3 text-center" [disabled]="!reportForm.valid">Submit</button>
+          <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                 
+                </fieldset>
+            </form>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box" [fullScreen]="true">
     <p style="color: white"> Fetching Posts... </p>
 </ngx-spinner>

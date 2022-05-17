@@ -10,4 +10,6 @@ export class comment{
         "updatedOn": string;
         "userId": string;
         "userName": string;
+        "createdTimeAgo":string
+        "updatedTimeAgo":string
 }

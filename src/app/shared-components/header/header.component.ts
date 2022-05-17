@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { RegisterService } from "src/app/components/register/register.service";
 
 @Component({
   selector: "app-header",
@@ -7,9 +8,21 @@ import { Router } from "@angular/router";
   styleUrls: ["./header.component.css"],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router,private regService: RegisterService,) {}
 
-  ngOnInit() {}
+  loggedInUserName:string=""
+  loggedInUserId:string=""
+  ngOnInit() {
+    this.loggedInUserId = JSON.parse(sessionStorage.getItem("userId")!);
+    this.getProfile();
+  }
+  private getProfile() {
+    this.regService.getuserProfile(this.loggedInUserId).subscribe((data) => {
+      console.log(data);
+      this.loggedInUserName = data.userName;
+    });
+  }
+
   logout() {
     this.router.navigateByUrl("");
     sessionStorage.clear();

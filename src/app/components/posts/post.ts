@@ -13,4 +13,6 @@ export class post {
   "userDisLiked":string
   "likedVoteCount":number;
   "dislikedVoteCount":number;
+  "createdTimeAgo":string;
+  "updatedTimeAgo":string
 }

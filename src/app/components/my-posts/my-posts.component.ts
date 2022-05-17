@@ -20,6 +20,7 @@ export class MyPostsComponent implements OnInit {
   ) {}
 
   myPostList: any;
+  myPostListCount:number=0;
 
   ngOnInit() {
     this.loggedInUserId = JSON.parse(sessionStorage.getItem("userId")!);
@@ -32,6 +33,7 @@ export class MyPostsComponent implements OnInit {
         this.spinner.hide();
         console.log(data);
         this.myPostList = data;
+        this.myPostListCount=this.myPostList.length
       });
     } catch (error) {
       this.toaster.showCatchErr(error);
