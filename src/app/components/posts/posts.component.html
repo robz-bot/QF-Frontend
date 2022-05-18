@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="col-lg-9 col-sm-12 col-md-12">
+        <div class="col-lg-12 col-sm-12 col-md-12">
             <div class="card">
                 <div class="card-body">
                 <ng-container *ngIf="postListLength>0">
@@ -8,18 +8,18 @@
                         <div class="col-lg-12 col-sm-12 col-md-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <a href="javascript:void(0)" (click)="navigateToPost(item.id)" [innerHtml]="item.description" class="text-decoration-none text-primary">{{item.description}}.splice(13)</a>
+                                    <a href="javascript:void(0)" (click)="navigateToPost(item.id)" [innerHtml]="item.description" class="text-decoration-none text-primary">{{item.description| slice:13}}</a>
                                 </div>
-                                <div class="card-footer d-flex justify-content-between">
+                                <div class="card-footer d-flex justify-content-between bg-info">
                                     <ul class="nav me-auto ">
                                         <li>
-                                           <small>{{item.userName}}, {{item.createdOn.split("T")[0]}} - {{item.createdTimeAgo }}</small> 
+                                           <small class="text-dark">{{item.userName}}, {{item.createdOn.split("T")[0]}} - {{item.createdTimeAgo }}</small> 
                                         </li>
                                     </ul>
                                     <div class="d-flex">
                                         <ul class="nav me-auto text-capitalize">
                                             <li class="mx-2" >
-                                                <a href="javascript:void(0)" class="fs-0 text-decoration-none text-info" (click)="postLikedByUser(item)"  title="Like">
+                                                <a href="javascript:void(0)" class="fs-0 text-decoration-none text-light" (click)="postLikedByUser(item)"  title="Like">
                                                     <i class="bi bi-hand-thumbs-up-fill" *ngIf="item.userLiked"></i>
                                                     <i class="bi bi-hand-thumbs-up" *ngIf="!item.userLiked"></i>
                                                     {{item.likedVoteCount}} 
@@ -33,12 +33,12 @@
                                                     {{item.disLikedVoteCount}}  </a>
                                             </li>
                                             <li class="mx-2">
-                                                <a href="javascript:void(0)"  (click)="navigateToPost(item.id)"  class="fs-0 text-decoration-none  text-dark" title="Comment"> <i class="bi bi-chat-text-fill"></i></a>
+                                                <a href="javascript:void(0)"  (click)="navigateToPost(item.id)"  class="fs-0 text-decoration-none  text-dark" title="Comment"> <i class="bi bi-chat-text-fill"></i> {{item.commentCount}}</a>
                                             </li>
                                             <li class="mx-2">
-                                                <a href="javascript:void(0)" class="fs-0 text-decoration-none text-danger" title="Report"
+                                                <a href="javascript:void(0)" class="fs-0 text-decoration-none text-warning" title="Report"
                                                 (click)="getAllReportsType(item)"
-                                                data-bs-toggle="modal" data-bs-target="#reportModal"> <i class="bi bi-flag-fill"></i></a>
+                                                data-bs-toggle="modal" data-bs-target="#reportModal"> <i class="bi bi-flag-fill"></i> {{item.reportCount}}</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -53,7 +53,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-sm-12 col-md-12">
+        <!-- <div class="col-lg-3 col-sm-12 col-md-12">
             <div class="card">
                 <div class="card-body">
                     <p class="text-center">Search Criteria:</p>
@@ -84,7 +84,7 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 
 </div>

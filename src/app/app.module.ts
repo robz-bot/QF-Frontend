@@ -19,6 +19,7 @@ import { NewPostComponent } from "./components/new-post/new-post.component";
 import { MyPostsComponent } from "./components/my-posts/my-posts.component";
 import { ProfileComponent } from './components/profile/profile.component';
 import { PostReportComponent } from './components/post-report/post-report.component';
+import { UpdatePostComponent } from './components/update-post/update-post.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +33,7 @@ import { PostReportComponent } from './components/post-report/post-report.compon
     MyPostsComponent,
     ProfileComponent,
     PostReportComponent,
+    UpdatePostComponent,
   ],
   imports: [
     CommonModule,

@@ -42,7 +42,7 @@ export class PostsComponent implements OnInit {
     });
   }
 
-  postList: any[] = [];
+  postList: post[] = [];
   postListLength: number = 0;
   getPosts() {
     this.spinner.show();
@@ -60,7 +60,7 @@ export class PostsComponent implements OnInit {
       this.toaster.showCatchErr(error);
     }
   }
-  navigateToPost(postId: number) {
+  navigateToPost(postId: string) {
     this.router.navigate(["/dashboard/post/", postId]);
   }
   newVote: vote = new vote();
@@ -99,6 +99,7 @@ export class PostsComponent implements OnInit {
         this.spinner.hide(); 
         this.reportForm.reset();
         this.closebutton.nativeElement.click();
+        this.getPosts()
       });
     } catch (err) {}
   }
@@ -110,6 +111,8 @@ export class PostsComponent implements OnInit {
       this.reportTypeList = data;
       this.reportedItem=item
       console.log(data);
+      
     });
+    
   }
 }

@@ -12,7 +12,9 @@ export class post {
   "userLiked":string
   "userDisLiked":string
   "likedVoteCount":number;
-  "dislikedVoteCount":number;
+  "disLikedVoteCount":number;
+  "commentCount":string
+  "reportCount":string
   "createdTimeAgo":string;
   "updatedTimeAgo":string
 }

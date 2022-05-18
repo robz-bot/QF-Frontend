@@ -8,6 +8,7 @@ import { PostCommentComponent } from "./components/post-comment/post-comment.com
 import { PostsComponent } from "./components/posts/posts.component";
 import { ProfileComponent } from "./components/profile/profile.component";
 import { RegisterComponent } from "./components/register/register.component";
+import { UpdatePostComponent } from "./components/update-post/update-post.component";
 
 const routes: Routes = [
   {
@@ -41,6 +42,10 @@ const routes: Routes = [
       {
         path: "profile",
         component: ProfileComponent,
+      },
+      {
+        path: "update-post/:id",
+        component: UpdatePostComponent,
       },
     ],
   },

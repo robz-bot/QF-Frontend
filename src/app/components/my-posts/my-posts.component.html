@@ -1,52 +1,110 @@
 <div class="container">
-    <div class="row">
-        <div class="col-lg-12 col-sm-12 col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <ng-container *ngIf="myPostListCount>0">
-                    <div class="row" *ngFor="let item of myPostList" >
-                        <div class="col-lg-12 col-sm-12 col-md-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <a href="javascript:void(0)" (click)="navigateToPost(item.id)" [innerHtml]="item.description" class="text-decoration-none text-primary">{{item.description}}</a>
-                                </div>
-                                <div class="card-footer d-flex justify-content-between">
-                                    <ul class="nav me-auto">
-                                        <li>
-                                            <small> {{item.createdOn.split("T")[0] }} - {{item.createdTimeAgo}}</small>
-                                        </li>
-                                    </ul>
-                                    <div class="d-flex">
-                                        <ul class="nav me-auto text-capitalize">
-                                            <li class="mx-2" >
-                                                <a href="javascript:void(0)" class="fs-0 text-decoration-none text-primary">
-                                                    <i class="bi bi-pencil-square"></i>
-                                                     
-                                                </a>
-                                            </li>
-                                            <li class="mx-2">
-                                                <a href="javascript:void(0)" class="fs-0 text-decoration-none text-danger">
-                                                    <i class="bi bi-trash-fill" ></i>
-                                                    </a>
-                                            </li>
-                                           
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+  <div class="row">
+    <div class="col-lg-12 col-sm-12 col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <ng-container *ngIf="myPostListCount > 0">
+            <div class="row" *ngFor="let item of myPostList">
+              <div class="col-lg-12 col-sm-12 col-md-12">
+                <div class="card">
+                  <div class="card-body">
+                    <a
+                      href="javascript:void(0)"
+                      (click)="navigateToPost(item.id)"
+                      [innerHtml]="item.description"
+                      class="text-decoration-none text-primary"
+                      >{{ item.description }}</a
+                    >
+                  </div>
+                  <div class="card-footer d-flex justify-content-between">
+                    <ul class="nav me-auto">
+                      <li>
+                        <small>
+                          {{ item.createdOn.split("T")[0] }} -
+                          {{ item.createdTimeAgo }}</small
+                        >
+                      </li>
+                    </ul>
+                    <div class="d-flex">
+                      <ul class="nav me-auto text-capitalize">
+                        <li class="mx-2">
+                          <a
+                            href="javascript:void(0)"
+                            routerLink="/dashboard/update-post/{{ item.id }}"
+                            class="fs-0 text-decoration-none text-primary"
+                          >
+                            <i class="bi bi-pencil-square"></i>
+                          </a>
+                        </li>
+                        <li class="mx-2">
+                          <a
+                            href="javascript:void(0)"
+                            class="fs-0 text-decoration-none text-danger"
+                            data-bs-toggle="offcanvas"
+                            data-bs-target="#deleteCanvasTop"
+                            aria-controls="deleteCanvasTop"
+                            (click)="getDeleteItem(item)"
+                          >
+                            <i class="bi bi-trash-fill"></i>
+                          </a>
+                        </li>
+                      </ul>
                     </div>
-                    </ng-container>
-                    <ng-container *ngIf="myPostListCount==0">
-                        <h5 class="text-center">No Post(s) available</h5>
-                    </ng-container>
+                  </div>
                 </div>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="myPostListCount == 0">
+            <h5 class="text-center">No Post(s) available</h5>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#fff"
+  type="square-jelly-box"
+  [fullScreen]="true"
+>
+  <p style="color: rgb(21, 10, 10)">Fetching your Posts...</p>
+</ngx-spinner>
+<div class="offcanvas offcanvas-top" style="height: 50vh;" tabindex="-1" id="deleteCanvasTop">
+  <div class="offcanvas-header container d-flex justify-content-center">
+    <div class="card text-center">
+      <div class="card-header bg-danger text-light">
+        <h5 class="text-center">Sure you want to delete this post?</h5>
+      </div>
+      <div class="card-body">
+        <small class="text-danger ">NOTE: Once post got deleted can not be revert back.</small>
+        <p>To delete your post type "DELETE MY POST"</p>
+        <form [formGroup]="deletePostForm" (ngSubmit)="onSubmitDelete()">
+            <fieldset>
+        <input type="text" class="form-control" [formControlName]="'deleteStatement'"/>
+        <div *ngIf="!deletePostForm.controls['deleteStatement'].valid && (deletePostForm.controls['deleteStatement'].dirty ||deletePostForm.controls['deleteStatement'].touched)">
+            <div [hidden]="!deletePostForm.controls['deleteStatement'].errors?.['required']">
+                <small class="text-danger">Delete Statement is required</small>
             </div>
         </div>
-
+        <button
+          type="submit"
+          class="btn btn-danger m-2"
+          [disabled]="!deletePostForm.valid"
+        >
+          Delete
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="offcanvas"
+          #closeDeleteButton
+        >
+          Cancel
+        </button></fieldset></form>
+      </div>
     </div>
-
+  </div>
 </div>
-<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box" [fullScreen]="true">
-    <p style="color: white"> Fetching your Posts... </p>
-</ngx-spinner>

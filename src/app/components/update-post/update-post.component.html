@@ -3,23 +3,23 @@
         <div class="col-lg-12 col-sm-12 col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form [formGroup]="newPostForm" (ngSubmit)="onSubmit()">
+                    <form [formGroup]="updatePostForm" (ngSubmit)="onSubmit()">
                         <fieldset>
                             <div class="form-group">
                                 <h2 class="text-center">Create your post</h2>
                                 <editor [formControlName]="'description'" [init]=controls></editor>
-                                <div *ngIf="!newPostForm.controls['description'].valid && (newPostForm.controls['description'].dirty ||newPostForm.controls['description'].touched)">
-                                    <div [hidden]="!newPostForm.controls['description'].errors?.['required']">
+                                <div *ngIf="!updatePostForm.controls['description'].valid && (updatePostForm.controls['description'].dirty ||updatePostForm.controls['description'].touched)">
+                                    <div [hidden]="!updatePostForm.controls['description'].errors?.['required']">
                                         <small class="text-danger">description is required</small>
                                     </div>
-                                    <div [hidden]="!newPostForm.controls['description'].errors?.['description']">
+                                    <div [hidden]="!updatePostForm.controls['description'].errors?.['description']">
                                         <small class="text-danger">description is Invalid</small>
                                     </div>
                                 </div>
                             </div>
                         </fieldset>
                         <fieldset class="text-center">
-                            <button type="submit" class="btn btn-md btn-primary my-3 text-center" >Post</button>
+                            <button type="submit" class="btn btn-md btn-primary my-3 text-center" >Update</button>
                         </fieldset>
                     </form>
                 </div>
@@ -30,5 +30,5 @@
 
 </div>
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box" [fullScreen]="true">
-    <p style="color: white"> Saving Post... </p>
+    <p style="color: white"> Fetching Posts... </p>
 </ngx-spinner>
