@@ -63,4 +63,6 @@ export class NewPostComponent implements OnInit {
       this.toaster.showCatchErr(err);
     }
   }
+
+ 
 }

@@ -15,6 +15,7 @@ export class PostService {
   private newPostUrl = baseUrl.BASE_URL + this.BASEURL+"newPost";
   private getPostsUrl = baseUrl.BASE_URL + this.BASEURL
   private allPostByUserIdUrl = baseUrl.BASE_URL + this.BASEURL+"allPostByUserId";
+  private getSearchPostDateUrl = baseUrl.BASE_URL + this.BASEURL+"getSearchPostDate";
   private getPostByIdUrl = baseUrl.BASE_URL + this.BASEURL+"getPost/";
   private deletePostUrl = baseUrl.BASE_URL + this.BASEURL+"deletePost";
   private getUserPostUrl = baseUrl.BASE_URL + this.BASEURL+"getUserPost/";
@@ -26,14 +27,17 @@ export class PostService {
   getPosts() {
     return this.httpClient.get(`${this.getPostsUrl}`);
   }
-  allPostByUserId(id:string):Observable<post[]> {
-    return this.httpClient.get<post[]>(`${this.allPostByUserIdUrl}/${id}`);
+  allPostByUserId(id:string,type:string):Observable<post[]> {
+    return this.httpClient.get<post[]>(`${this.allPostByUserIdUrl}/${id}/${type}`);
   }
   getUserPost(userId: number) {
     return this.httpClient.get(`${this.getUserPostUrl}/${userId}`);
   }
   getPostById(id: string):Observable<post> {
     return this.httpClient.get<post>(`${this.getPostByIdUrl}/${id}`);
+  }
+  getSearchPostDate(date: string):Observable<post[]> {
+    return this.httpClient.get<post[]>(`${this.getSearchPostDateUrl}/${date}`);
   }
   deletePost(id: string):Observable<post> {
     return this.httpClient.delete<post>(`${this.deletePostUrl}/${id}`);

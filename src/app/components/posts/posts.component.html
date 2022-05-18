@@ -1,143 +1,259 @@
 <div class="container">
-    <div class="row">
-        <div class="col-lg-12 col-sm-12 col-md-12">
-            <div class="card">
-                <div class="card-body">
-                <ng-container *ngIf="postListLength>0">
-                    <div class="row" *ngFor="let item of postList">
-                        <div class="col-lg-12 col-sm-12 col-md-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <a href="javascript:void(0)" (click)="navigateToPost(item.id)" [innerHtml]="item.description" class="text-decoration-none text-primary">{{item.description| slice:13}}</a>
-                                </div>
-                                <div class="card-footer d-flex justify-content-between bg-info">
-                                    <ul class="nav me-auto ">
-                                        <li>
-                                           <small class="text-dark">{{item.userName}}, {{item.createdOn.split("T")[0]}} - {{item.createdTimeAgo }}</small> 
-                                        </li>
-                                    </ul>
-                                    <div class="d-flex">
-                                        <ul class="nav me-auto text-capitalize">
-                                            <li class="mx-2" >
-                                                <a href="javascript:void(0)" class="fs-0 text-decoration-none text-light" (click)="postLikedByUser(item)"  title="Like">
-                                                    <i class="bi bi-hand-thumbs-up-fill" *ngIf="item.userLiked"></i>
-                                                    <i class="bi bi-hand-thumbs-up" *ngIf="!item.userLiked"></i>
-                                                    {{item.likedVoteCount}} 
-                                                </a>
-                                            </li>
-                                            <li class="mx-2">
-                                                <a href="javascript:void(0)" class="fs-0 text-decoration-none  text-danger" (click)="postDisLikedByUser(item)"  title="Dislike">
-                                                    <i class="bi bi-hand-thumbs-down-fill" *ngIf="item.userDisLiked"></i>
-                                                    <i class="bi bi-hand-thumbs-down" *ngIf="!item.userDisLiked"></i>
-                                                    
-                                                    {{item.disLikedVoteCount}}  </a>
-                                            </li>
-                                            <li class="mx-2">
-                                                <a href="javascript:void(0)"  (click)="navigateToPost(item.id)"  class="fs-0 text-decoration-none  text-dark" title="Comment"> <i class="bi bi-chat-text-fill"></i> {{item.commentCount}}</a>
-                                            </li>
-                                            <li class="mx-2">
-                                                <a href="javascript:void(0)" class="fs-0 text-decoration-none text-warning" title="Report"
-                                                (click)="getAllReportsType(item)"
-                                                data-bs-toggle="modal" data-bs-target="#reportModal"> <i class="bi bi-flag-fill"></i> {{item.reportCount}}</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+  <div class="row">
+    <div class="col-lg-9 col-sm-12 col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <ng-container *ngIf="postListLength > 0">
+            <div class="row" *ngFor="let item of postList">
+              <div class="col-lg-12 col-sm-12 col-md-12">
+                <div class="card">
+                  <div class="card-body">
+                    <a
+                      href="javascript:void(0)"
+                      (click)="navigateToPost(item.id)"
+                      [innerHtml]="(item.description.length>140) ? (item.description | slice: 0:140)+'...Read More':item.description"
+                      class="text-decoration-none text-primary"
+                      >{{ item.description | slice: 0:13 }}</a
+                    >
+                  </div>
+                  <div
+                    class="card-footer d-flex justify-content-between bg-info"
+                  >
+                    <ul class="nav me-auto">
+                      <li>
+                        <small class="text-dark"
+                          >{{ item.userName }},
+                          {{ item.createdOn.split("T")[0] }} -
+                          {{ item.createdTimeAgo }}</small
+                        >
+                      </li>
+                    </ul>
+                    <div class="d-flex">
+                      <ul class="nav me-auto text-capitalize">
+                        <li class="mx-2">
+                          <a
+                            href="javascript:void(0)"
+                            class="fs-0 text-decoration-none text-light"
+                            (click)="postLikedByUser(item)"
+                            title="Like"
+                          >
+                            <i
+                              class="bi bi-hand-thumbs-up-fill"
+                              *ngIf="item.userLiked"
+                            ></i>
+                            <i
+                              class="bi bi-hand-thumbs-up"
+                              *ngIf="!item.userLiked"
+                            ></i>
+                            {{ item.likedVoteCount }}
+                          </a>
+                        </li>
+                        <li class="mx-2">
+                          <a
+                            href="javascript:void(0)"
+                            class="fs-0 text-decoration-none text-danger"
+                            (click)="postDisLikedByUser(item)"
+                            title="Dislike"
+                          >
+                            <i
+                              class="bi bi-hand-thumbs-down-fill"
+                              *ngIf="item.userDisLiked"
+                            ></i>
+                            <i
+                              class="bi bi-hand-thumbs-down"
+                              *ngIf="!item.userDisLiked"
+                            ></i>
+
+                            {{ item.disLikedVoteCount }}
+                          </a>
+                        </li>
+                        <li class="mx-2">
+                          <a
+                            href="javascript:void(0)"
+                            (click)="navigateToPost(item.id)"
+                            class="fs-0 text-decoration-none text-dark"
+                            title="Comment"
+                          >
+                            <i class="bi bi-chat-text-fill"></i>
+                            {{ item.commentCount }}</a
+                          >
+                        </li>
+                        <li class="mx-2">
+                          <a
+                            href="javascript:void(0)"
+                            class="fs-0 text-decoration-none text-warning"
+                            title="Report"
+                            (click)="getAllReportsType(item)"
+                            data-bs-toggle="modal"
+                            data-bs-target="#reportModal"
+                          >
+                            <i class="bi bi-flag-fill"></i>
+                            {{ item.reportCount }}</a
+                          >
+                        </li>
+                      </ul>
                     </div>
-                </ng-container>
-                <ng-container *ngIf="postListLength==0">
-                    <h3 class="text-center">No post available</h3>
-                </ng-container> 
+                  </div>
                 </div>
+              </div>
             </div>
+          </ng-container>
+          <ng-container *ngIf="postListLength == 0">
+            <h3 class="text-center">No post(s) available</h3>
+          </ng-container>
         </div>
-        <!-- <div class="col-lg-3 col-sm-12 col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <p class="text-center">Search Criteria:</p>
-                    <form action="">
-                        <fieldset>
-                            <div class="form-check d-flex justify-content-between ">
-                                <input class="form-check-input" type="checkbox" value="" checked>
-                                <label class="form-check-label mx-2">
-                              All
-                                </label>
-                                <span class="badge rounded-pill bg-primary float-end ">1</span>
-
-
-                            </div>
-                            <div class="form-check d-flex justify-content-between">
-                                <input class="form-check-input" type="checkbox" value="">
-                                <label class="form-check-label">
-                             High Rated Post(s)
-                            </label><span class="badge rounded-pill bg-primary float-end">1</span>
-                            </div>
-                            <div class="form-check d-flex justify-content-between">
-                                <input class="form-check-input" type="checkbox" value="">
-                                <label class="form-check-label">
-                             Recent Post(s)
-                            </label><span class="badge rounded-pill bg-primary float-end">1</span>
-                            </div>
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
-        </div> -->
+      </div>
     </div>
-
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="reportModal"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Report Form </h5>
-          <button type="button" #closebutton class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <form [formGroup]="reportForm" (ngSubmit)="onSubmitReport()">
-                <fieldset>
-                    <div class="form-group">
-                        <label class="form-label ">Report Type</label>
-                        <select class="form-select" formControlName="reportTypeId" >
-                            <option value="{{item.id}}" *ngFor="let item of reportTypeList">
-                                {{item.report}}</option>
-                            
-                          </select> 
-                        <div *ngIf="!reportForm.controls['reportTypeId'].valid && (reportForm.controls['reportTypeId'].dirty ||reportForm.controls['reportTypeId'].touched)">
-                            <div [hidden]="!reportForm.controls['reportTypeId'].errors?.['required']">
-                                <small class="text-danger">Report Type is required</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label mt-4">Reason</label>
-                        <textarea class="form-control" formControlName="reason"></textarea>
-                        <div *ngIf="!reportForm.controls['reason'].valid && (reportForm.controls['reason'].dirty ||reportForm.controls['reason'].touched)">
-                            <div [hidden]="!reportForm.controls['reason'].errors?.['required']">
-                                <small class="text-danger">Reason is required</small>
-                            </div>
-                         
-                        </div>
-                    </div>
-
-                </fieldset>
-                <fieldset class="text-center">
-                    <button type="submit" class="btn btn-md btn-primary my-3 text-center" [disabled]="!reportForm.valid">Submit</button>
-          <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-                 
-                </fieldset>
+    <div class="col-lg-3 col-sm-12 col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <p class="text-center">Filter Criteria:</p>
+          <hr />
+          <fieldset>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                (click)="onSubmitSearch('ASC')"
+                name="type"
+                value="ASC"
+                checked
+              />
+              <label class="form-check-label" for="flexRadioDefault1">
+                New Post(s)
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                (click)="onSubmitSearch('DESC')"
+                name="type"
+                value="DESC"
+              />
+              <label class="form-check-label" for="flexRadioDefault1">
+                Old Post(s)
+              </label>
+            </div>
+            <hr />
+            <form [formGroup]="dateForm" (ngSubmit)="onSubmitDate()">
+              <div class="my-2">
+                <input
+                  type="date"
+                  name="date"
+                  value="{{ todayDate }}"
+                  class="form-control form-control-sm"
+                  formControlName="date"
+                />
+                <button
+                  type="submit"
+                  class="btn btn-sm btn-primary my-2"
+                  [disabled]="!dateForm.valid"
+                >
+                  Search by Date
+                </button>
+              </div>
             </form>
-        </div>
-        <div class="modal-footer">
+          </fieldset>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box" [fullScreen]="true">
-    <p style="color: white"> Fetching Posts... </p>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="reportModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Report Form</h5>
+        <button
+          type="button"
+          #closebutton
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="reportForm" (ngSubmit)="onSubmitReport()">
+          <fieldset>
+            <div class="form-group">
+              <label class="form-label">Report Type</label>
+              <select class="form-select" formControlName="reportTypeId">
+                <option
+                  value="{{ item.id }}"
+                  *ngFor="let item of reportTypeList"
+                >
+                  {{ item.report }}
+                </option>
+              </select>
+              <div
+                *ngIf="
+                  !reportForm.controls['reportTypeId'].valid &&
+                  (reportForm.controls['reportTypeId'].dirty ||
+                    reportForm.controls['reportTypeId'].touched)
+                "
+              >
+                <div
+                  [hidden]="!reportForm.controls['reportTypeId'].errors?.['required']"
+                >
+                  <small class="text-danger">Report Type is required</small>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label mt-4">Reason</label>
+              <textarea
+                class="form-control"
+                formControlName="reason"
+              ></textarea>
+              <div
+                *ngIf="
+                  !reportForm.controls['reason'].valid &&
+                  (reportForm.controls['reason'].dirty ||
+                    reportForm.controls['reason'].touched)
+                "
+              >
+                <div
+                  [hidden]="!reportForm.controls['reason'].errors?.['required']"
+                >
+                  <small class="text-danger">Reason is required</small>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="text-center">
+            <button
+              type="submit"
+              class="btn btn-md btn-primary my-3 text-center"
+              [disabled]="!reportForm.valid"
+            >
+              Submit
+            </button>
+            <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+          </fieldset>
+        </form>
+      </div>
+      <div class="modal-footer"></div>
+    </div>
+  </div>
+</div>
+
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#fff"
+  type="square-jelly-box"
+  [fullScreen]="true"
+>
+  <p style="color: white">Fetching Posts...</p>
 </ngx-spinner>

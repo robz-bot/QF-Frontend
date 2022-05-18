@@ -9,6 +9,7 @@ import { PostService } from "./post.service";
 import { report } from "./report";
 import { ReportService } from "./report.service";
 import { ReportTypeService } from "./report_type";
+import { searchPost } from "./search-post";
 import { vote } from "./vote";
 import { VoteService } from "./vote.service";
 
@@ -30,7 +31,9 @@ export class PostsComponent implements OnInit {
     private reportService: ReportService
   ) {}
   reportForm!: FormGroup;
+  dateForm!: FormGroup;
   reportValue: report = new report();
+  searchValue: searchPost = new searchPost();
   ngOnInit() {
     this.loggedInUserId = JSON.parse(sessionStorage.getItem("userId")!);
     //To get AllPosts
@@ -40,6 +43,10 @@ export class PostsComponent implements OnInit {
       reportTypeId: new FormControl("", [Validators.required]),
       reason: new FormControl("", [Validators.required]),
     });
+
+    this.dateForm=new FormGroup({
+      date: new FormControl("", [Validators.required]),
+    })
   }
 
   postList: post[] = [];
@@ -48,7 +55,7 @@ export class PostsComponent implements OnInit {
     this.spinner.show();
     try {
       this.postService
-        .allPostByUserId(this.loggedInUserId)
+        .allPostByUserId(this.loggedInUserId,"DESC")
         .subscribe((data) => {
           this.spinner.hide();
           console.log(data);
@@ -113,6 +120,47 @@ export class PostsComponent implements OnInit {
       console.log(data);
       
     });
-    
+  }
+
+  onSubmitSearch(type:string){
+    console.log(type)
+    if(type=="ASC"){
+      this.postService
+        .allPostByUserId(this.loggedInUserId,"ASC")
+        .subscribe((data) => {
+          this.spinner.hide();
+          console.log(data);
+          this.postList = data.reverse();
+          this.postListLength = data.length;
+        });
+    }else if(type=="DESC"){
+      this.postService
+      .allPostByUserId(this.loggedInUserId,"DESC")
+      .subscribe((data) => {
+        this.spinner.hide();
+        console.log(data);
+        this.postList = data.reverse();
+        this.postListLength = data.length;
+      });
+    }
+  }
+
+  todayDate:string = new Date().toISOString().split("T")[0]
+  onSubmitDate(){
+    console.log(this.dateForm.value)
+    this.spinner.show();
+    try {
+      this.postService
+        .getSearchPostDate(this.dateForm.value.date)
+        .subscribe((data) => {
+          this.spinner.hide();
+          console.log(data);
+          this.postList = data;
+          this.postListLength = data.length;
+        });
+    } catch (error) {
+      this.spinner.hide();
+      this.toaster.showCatchErr(error);
+    }
   }
 }
