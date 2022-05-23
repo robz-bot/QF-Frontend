@@ -67,6 +67,7 @@ export class PostsComponent implements OnInit {
       this.toaster.showCatchErr(error);
     }
   }
+  
   navigateToPost(postId: string) {
     this.router.navigate(["/dashboard/post/", postId]);
   }

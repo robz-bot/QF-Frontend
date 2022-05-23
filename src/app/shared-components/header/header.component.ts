@@ -8,14 +8,19 @@ import { RegisterService } from "src/app/components/register/register.service";
   styleUrls: ["./header.component.css"],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private router: Router,private regService: RegisterService,) {}
+  constructor(private router: Router, private regService: RegisterService) {}
 
-  loggedInUserName:string=""
-  loggedInUserId:string=""
+  loggedInUserName: string = "";
+  loggedInUserId: string = "";
   ngOnInit() {
     this.loggedInUserId = JSON.parse(sessionStorage.getItem("userId")!);
-    this.getProfile();
+    if (this.loggedInUserId == "0") {
+      this.loggedInUserName = "Admin";
+    } else {
+      this.getProfile();
+    }
   }
+
   private getProfile() {
     this.regService.getuserProfile(this.loggedInUserId).subscribe((data) => {
       console.log(data);

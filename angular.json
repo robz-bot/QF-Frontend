@@ -34,7 +34,8 @@
                             "src/assets/css/bootstrap.min.css", "node_modules/ngx-toastr/toastr.css",
                             "node_modules/ngx-spinner/animations/square-jelly-box.css"
                         ],
-                        "scripts": []
+                        "scripts": [
+                        ]
                     },
                     "configurations": {
                         "production": {

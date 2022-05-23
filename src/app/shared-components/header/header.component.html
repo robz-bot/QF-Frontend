@@ -2,19 +2,27 @@
   <div class="container">
     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
       <a href="javascript:void(0)" class="d-flex align-items-center mb-1 mb-lg-0 text-dark text-decoration-none">
-        <h4 class="text-light">Query Forum</h4>
+        <h4 class="text-light tw_header">Query Forum</h4>
       </a>
 
-      <ul class="nav col-12 col-lg-auto me-lg-auto mb-1 justify-content-center mx-5" >
-        <li><a href="javascript:void(0)" class="nav-link px-2 link-light" routerLink="/dashboard">Home</a></li>
-        <li><a href="javascript:void(0)" class="nav-link px-2 link-light" routerLink="/dashboard/post">New Post</a></li>
-        <li><a href="javascript:void(0)" class="nav-link px-2 link-light" routerLink="/dashboard/my-post">My Posts</a></li>
-      </ul>
+      <!-- Admin -->
+      <ng-container *ngIf="this.loggedInUserId=='0'">
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-1 justify-content-center mx-5">
+          <li><a href="javascript:void(0)" class="nav-link px-2 link-light" routerLink="/admin-dashboard">Dashboard</a></li>
+          <li><a href="javascript:void(0)" class="nav-link px-2 link-light" routerLink="/dashboard/post">New Post</a></li>
+          <li><a href="javascript:void(0)" class="nav-link px-2 link-light" routerLink="/dashboard/my-post">My Posts</a></li>
+        </ul>
+      </ng-container>
+      <!-- User -->
+      <ng-container *ngIf="this.loggedInUserId!='0'">
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-1 justify-content-center mx-5">
+          <li><a href="javascript:void(0)" class="nav-link px-2 link-light" routerLink="/dashboard">Home</a></li>
+          <li><a href="javascript:void(0)" class="nav-link px-2 link-light" routerLink="/dashboard/post">New Post</a></li>
+          <li><a href="javascript:void(0)" class="nav-link px-2 link-light" routerLink="/dashboard/my-post">My Posts</a></li>
+        </ul>
+      </ng-container>
+         
 
-      <!-- <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-        <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
-      </form> -->
-     
       <p class="d-block mx-1 mb-1 text-light">Welcome, {{loggedInUserName}} !</p>
 
       <div class="dropdown text-end">

@@ -1,5 +1,8 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { AdminDashboardComponent } from "./components/admin-dashboard/admin-dashboard.component";
+import { AdminOverviewComponent } from "./components/admin-overview/admin-overview.component";
+import { AdminPostsComponent } from "./components/admin-posts/admin-posts.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { LoginComponent } from "./components/login/login.component";
 import { MyPostsComponent } from "./components/my-posts/my-posts.component";
@@ -49,6 +52,20 @@ const routes: Routes = [
       },
     ],
   },
+  {
+    path:"admin-dashboard",
+    component: AdminDashboardComponent,
+    children: [
+      {
+        path: "",
+        component: AdminOverviewComponent,
+      },
+      {
+        path: "admin-posts",
+        component: AdminPostsComponent,
+      }
+    ]
+  }
 ];
 
 @NgModule({

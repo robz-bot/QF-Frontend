@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private route: Router
   ) {}
-  loginForm!: FormGroup;  
+  loginForm!: FormGroup;
   loginValue: register = new register();
   ngOnInit() {
     this.loginForm = new FormGroup({
@@ -33,23 +33,33 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.spinner.show();
     this.loginValue = this.loginForm.value;
-
-    try {
-      this.registerService.loginUser(this.loginValue).subscribe((data) => {
-        this.resData = data;
-        this.spinner.hide();
-        console.log(this.resData);
-        if (this.resData.success) {
-          sessionStorage.setItem("userId", this.resData.userId);
-          this.loginForm.reset();
-          this.toaster.showSuccess(this.resData.message);
-          this.route.navigateByUrl("/dashboard");
-        } else {
-          this.toaster.showFailure(this.resData.message);
-        }
-      });
-    } catch (err) {
-      this.toaster.showCatchErr(err);
+console.log(this.loginValue)
+    if (
+      this.loginValue.email == "admin@mail.com" &&
+      this.loginValue.password == "admin123"
+    ) {
+      sessionStorage.setItem("userId", "0");
+      this.loginForm.reset();
+      this.toaster.showSuccess("Logged In Success");
+      this.route.navigateByUrl("/admin-dashboard");
+    } else {
+      try {
+        this.registerService.loginUser(this.loginValue).subscribe((data) => {
+          this.resData = data;
+          this.spinner.hide();
+          console.log(this.resData);
+          if (this.resData.success) {
+            sessionStorage.setItem("userId", this.resData.userId);
+            this.loginForm.reset();
+            this.toaster.showSuccess(this.resData.message);
+            this.route.navigateByUrl("/dashboard");
+          } else {
+            this.toaster.showFailure(this.resData.message);
+          }
+        });
+      } catch (err) {
+        this.toaster.showCatchErr(err);
+      }
     }
   }
 }

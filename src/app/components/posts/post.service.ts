@@ -25,7 +25,7 @@ export class PostService {
     return this.httpClient.post(`${this.newPostUrl}`, post);
   }
   getPosts() {
-    return this.httpClient.get(`${this.getPostsUrl}`);
+    return this.httpClient.get<post[]>(`${this.getPostsUrl}`);
   }
   allPostByUserId(id:string,type:string):Observable<post[]> {
     return this.httpClient.get<post[]>(`${this.allPostByUserIdUrl}/${id}/${type}`);

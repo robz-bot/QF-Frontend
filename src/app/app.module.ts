@@ -20,6 +20,9 @@ import { MyPostsComponent } from "./components/my-posts/my-posts.component";
 import { ProfileComponent } from './components/profile/profile.component';
 import { PostReportComponent } from './components/post-report/post-report.component';
 import { UpdatePostComponent } from './components/update-post/update-post.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { AdminOverviewComponent } from './components/admin-overview/admin-overview.component';
+import { AdminPostsComponent } from './components/admin-posts/admin-posts.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +37,9 @@ import { UpdatePostComponent } from './components/update-post/update-post.compon
     ProfileComponent,
     PostReportComponent,
     UpdatePostComponent,
+    AdminDashboardComponent,
+    AdminOverviewComponent,
+    AdminPostsComponent,
   ],
   imports: [
     CommonModule,
