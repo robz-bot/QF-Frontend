@@ -32,7 +32,9 @@ export class AdminPostsComponent implements OnInit {
   }
   postList: post[] = [];
   postListLength: number = 0;
+  spinnerMsg:string=""
   getPosts() {
+    this.spinnerMsg="Fetching post(s)..."
     this.spinner.show();
     try {
       this.postService.getPosts().subscribe((data) => {
@@ -46,12 +48,15 @@ export class AdminPostsComponent implements OnInit {
       this.toaster.showCatchErr(error);
     }
   }
-
+  resData:post=new post()
   deletePost(item: post) {
+    this.spinnerMsg="Deleting post..."
     console.log(item);
     this.spinner.show();
     this.postService.deletePost(item.id).subscribe(data=>{
       console.log(data);
+      this.resData=data;
+      this.toaster.showSuccess(this.resData.message);
       this.getPosts() 
       this.spinner.hide();
       this.closePopover.hide()
