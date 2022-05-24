@@ -13,7 +13,7 @@
                       (click)="navigateToPost(item.id)"
                       [innerHtml]="(item.description.length>140) ? (item.description | slice: 0:140)+'...Read More':item.description"
                       class="text-decoration-none text-primary"
-                      >{{ item.description | slice: 0:13 }}</a
+                      >{{ item.description }}</a
                     >
                   </div>
                   <div

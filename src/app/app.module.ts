@@ -23,6 +23,7 @@ import { UpdatePostComponent } from './components/update-post/update-post.compon
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { AdminOverviewComponent } from './components/admin-overview/admin-overview.component';
 import { AdminPostsComponent } from './components/admin-posts/admin-posts.component';
+import { PopoverModule } from "ngx-smart-popover";
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +44,7 @@ import { AdminPostsComponent } from './components/admin-posts/admin-posts.compon
   ],
   imports: [
     CommonModule,
+    PopoverModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
