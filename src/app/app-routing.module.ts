@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { AdminCommentsComponent } from "./components/admin-comments/admin-comments.component";
 import { AdminDashboardComponent } from "./components/admin-dashboard/admin-dashboard.component";
 import { AdminOverviewComponent } from "./components/admin-overview/admin-overview.component";
 import { AdminPostsComponent } from "./components/admin-posts/admin-posts.component";
@@ -63,6 +64,10 @@ const routes: Routes = [
       {
         path: "admin-posts",
         component: AdminPostsComponent,
+      },
+      {
+        path: "admin-comments",
+        component: AdminCommentsComponent,
       }
     ]
   }

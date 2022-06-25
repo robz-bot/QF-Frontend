@@ -1,5 +1,6 @@
 <div class="container">
   <div class="row">
+    <ng-contaniner *ngIf="postListLength>0">
     <table class="table table-hover table-sm">
       <thead>
         <tr>
@@ -55,13 +56,15 @@
               [animation]="true"
             >
               <span class="text-danger">Sure you want to delete this post?</span> <br>
-              <button class="btn btn-sm text-danger" (click)="deletePost(item)" >Yes</button>
-              <button class="btn btn-sm text-secondary" #deleteHide (click)="deletePopover.hide()">No</button>
+              <button class="btn btn-sm btn-danger text-light m-2" (click)="deletePost(item)" >Yes</button>
+              <button class="btn btn-sm btn-dark text-light" #deleteHide (click)="deletePopover.hide()">No</button>
             </popover-content>
           </td>
         </tr>
       </tbody>
     </table>
+  </ng-contaniner>
+  <ng-container *ngIf="postListLength==0"><h3 class="text-center">No Post(s) available right now</h3></ng-container>
   </div>
 </div>
 <ngx-spinner

@@ -24,6 +24,7 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { AdminOverviewComponent } from './components/admin-overview/admin-overview.component';
 import { AdminPostsComponent } from './components/admin-posts/admin-posts.component';
 import { PopoverModule } from "ngx-smart-popover";
+import { AdminCommentsComponent } from './components/admin-comments/admin-comments.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +42,7 @@ import { PopoverModule } from "ngx-smart-popover";
     AdminDashboardComponent,
     AdminOverviewComponent,
     AdminPostsComponent,
+    AdminCommentsComponent,
   ],
   imports: [
     CommonModule,
